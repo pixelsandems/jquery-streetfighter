@@ -1,52 +1,61 @@
 $(document).ready(function() {
+	var ryuStill=$('.ryu-still');
+	var ryuReady=$('.ryu-ready');
+	var ryuCool=$('.ryu-cool');
+	var ryuThrowing=$('.ryu-throwing');
+	var hadouken=$('.hadouken');
+	var hadoukenSound=$('#hadouken-sound');
+
 	$('.ryu').mouseenter(function() {
-		$('.ryu-still').hide();
-		$('.ryu-ready').show();
-		$('.ryu-cool').hide();	
+		ryuStill.hide();
+		ryuReady.show();
+		ryuCool.hide();	
 	})
 	.mouseleave(function() {
-		$('.ryu-ready').hide();
-		$('.ryu-still').show();
-		$('.ryu-cool').hide();	
+		ryuReady.hide();
+		ryuStill.show();
+		ryuCool.hide();	
 	})
 	.mousedown(function() {
 		playHadouken();
-		$('.ryu-ready').hide();
-		$('.ryu-throwing').show();
-		$('.hadouken').finish().show().animate(
+		ryuReady.hide();
+		ryuThrowing.show();
+		hadouken.finish().show().animate(
 			{'left': '1020px'},
 			500,//# of milliseconds for ani
 			function() {
+				/*console.log (this);*/
 				$(this).hide();
 				$(this).css('left', '520px');
 			});
 	})
 	.mouseup(function() {
-		$('.ryu-throwing').hide();
-		$('.ryu-ready').show();
+		ryuThrowing.hide();
+		ryuReady.show();
 		// ryu goes back to his ready position
 	})
 
- 	$(document).keydown (function(key) {
-        if (key.keyCode == 88) {
-            $('.ryu-still').hide();
-            $('.ryu-ready').hide();
-            $('.ryu-throwing').hide();
-            $('.ryu-cool').show();
+ 	$(document).keydown (function(event) {
+ 		/*console.log(event);*/
+        if (event.keyCode == 88) {
+            ryuStill.hide();
+            ryuReady.hide();
+            ryuThrowing.hide();
+            ryuCool.show();
         }
      })
-        .keyup (function(key) {
-        	if (key.keyCode == 88) {
-        	$('.ryu-still').show();
-            $('.ryu-ready').hide();
-            $('.ryu-throwing').hide();
-            $('.ryu-cool').hide();	
+        .keyup (function(event) {
+        	if (event.keyCode == 88) {
+        	ryuStill.show();
+            ryuReady.hide();
+            ryuThrowing.hide();
+            ryuCool.hide();	
         }
      });
 
 function playHadouken () {
-	$('#hadouken-sound')[0].volume = 0.5;
-	$('#hadouken-sound')[0].load();
-	$('#hadouken-sound')[0].play();
+	hadoukenSound[0].volume = 0.5;
+	hadoukenSound[0].load();
+	hadoukenSound[0].play();
 	}
 });
